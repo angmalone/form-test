@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "antd/dist/antd.css";
-import { Form, Input } from "antd";
+import { Form, Input, Button } from "antd";
 
 const FormItem = Form.Item;
 
@@ -17,6 +17,10 @@ const CustomizedForm = Form.create({
       requestedBy: Form.createFormField({
         ...props.requestedBy,
         value: props.requestedBy.value
+      }),
+      amazonURL: Form.createFormField({
+        ...props.amazonURL,
+        value: props.amazonURL.value
       })
     };
   },
@@ -29,15 +33,21 @@ const CustomizedForm = Form.create({
     <Form layout="inline">
       <FormItem label="Name">
         {getFieldDecorator("name", {
-          rules: [{ required: true, message: "Username is required!" }]
+          rules: [{ required: true, message: "Snack name is required!" }]
         })(<Input />)}
       </FormItem>
 
       <FormItem label="Requested By">
-        {getFieldDecorator("requestedBy", {
-          rules: [{ required: true, message: "Username is required!" }]
-        })(<Input />)}
+        {getFieldDecorator("requestedBy", {})(<Input />)}
       </FormItem>
+
+      <FormItem label="Amazon URL">
+        {getFieldDecorator("amazonURL", {})(<Input />)}
+      </FormItem>
+
+      <Button type="primary" htmlType="submit">
+        Submit
+      </Button>
     </Form>
   );
 });
@@ -50,6 +60,9 @@ class Test extends React.Component {
       },
       requestedBy: {
         value: "angela"
+      },
+      amazonURL: {
+        value: ""
       }
     }
   };
