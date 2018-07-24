@@ -13,7 +13,7 @@ const CollectionCreateForm = Form.create()(
       return (
         <Modal
           visible={visible}
-          title="Add a snack"
+          title="Add a snack!"
           okText="Add!"
           onCancel={onCancel}
           onOk={onCreate}
@@ -29,8 +29,8 @@ const CollectionCreateForm = Form.create()(
                 ]
               })(<Input />)}
             </FormItem>
-            <FormItem label="Description">
-              {getFieldDecorator("description")(<Input type="textarea" />)}
+            <FormItem label="Amazon URL">
+              {getFieldDecorator("amazonURL")(<Input type="textarea" />)}
             </FormItem>
           </Form>
         </Modal>
@@ -61,7 +61,8 @@ class Test2 extends React.Component {
       axios.post("http://localhost:3000/api/snacks", {
         /*values: JSON.stringify(this.values),
         contentType: "application/json"*/
-        name: values.name
+        name: values.name,
+        amazonURL: values.amazonURL
       });
       console.log("Received values of form: ", values);
       console.log(JSON.stringify(values));
