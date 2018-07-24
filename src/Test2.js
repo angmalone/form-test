@@ -20,7 +20,7 @@ const CollectionCreateForm = Form.create()(
         >
           <Form layout="vertical">
             <FormItem label="Snack Name">
-              {getFieldDecorator("title", {
+              {getFieldDecorator("name", {
                 rules: [
                   {
                     required: true,
@@ -59,9 +59,12 @@ class Test2 extends React.Component {
         return;
       }
       axios.post("http://localhost:3000/api/snacks", {
-        values
+        /*values: JSON.stringify(this.values),
+        contentType: "application/json"*/
+        name: values.name
       });
       console.log("Received values of form: ", values);
+      console.log(JSON.stringify(values));
       form.resetFields();
       this.setState({ visible: false });
     });
