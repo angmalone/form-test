@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "antd/dist/antd.css";
 import { Form, Input, Button } from "antd";
+import axios from "axios";
 
 const FormItem = Form.Item;
 
@@ -45,7 +46,7 @@ const CustomizedForm = Form.create({
         {getFieldDecorator("amazonURL", {})(<Input />)}
       </FormItem>
 
-      <Button type="primary" htmlType="submit">
+      <Button type="submit" htmlType="submit">
         Submit
       </Button>
     </Form>
@@ -66,6 +67,7 @@ class Test extends React.Component {
       }
     }
   };
+  submitForm = this.submitForm.bind(this);
 
   handleFormChange = changedFields => {
     this.setState(({ fields }) => ({
@@ -73,11 +75,25 @@ class Test extends React.Component {
     }));
   };
 
+  submitForm(e) {
+    e.preventDefault();
+    console.log("hi");
+    axios.post("http://localhost:3000/api/snacks", {
+      name: this.state.name,
+      requestedBy: this.state.requestedBy,
+      amazonURL: this.state.amazonURL
+    });
+  }
+
   render() {
     const fields = this.state.fields;
     return (
       <div>
-        <CustomizedForm {...fields} onChange={this.handleFormChange} />
+        <CustomizedForm
+          {...fields}
+          onChange={this.handleFormChange}
+          onSubmit={this.submitForm}
+        />
         <pre className="language-bash">{JSON.stringify(fields, null, 2)}</pre>
       </div>
     );
